@@ -30,7 +30,11 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
-              <img src="/app-icon.png" alt="App Icon" className="w-8 h-8 rounded-full" />
+              <img 
+                src={`${process.env.PUBLIC_URL}/app-icon.png`} 
+                alt="App Icon" 
+                className="w-8 h-8 rounded-full" 
+              />
               <span className="text-orange-600 text-xl font-semibold">St⭐rry</span>
             </div>
 
@@ -96,7 +100,7 @@ const LandingPage = () => {
         {/* App Icon */}
         <div className="w-32 h-32 mx-auto mb-6 relative">
           <img 
-            src="/app-icon.png" 
+            src={`${process.env.PUBLIC_URL}/app-icon.png`}
             alt="App Icon" 
             className="w-full h-full object-contain rounded-full shadow-lg"
           />
