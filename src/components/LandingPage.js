@@ -168,14 +168,14 @@ const LandingPage = () => {
               style={{ paddingBottom: '16px', zIndex: '100' }}
             >
               <a
-                href="/Group_3_Starry.zip"
+                href={`${process.env.PUBLIC_URL}/Group_3_Starry.zip`}
                 download
                 className="block px-4 py-2 text-orange-600 hover:bg-orange-50 transition-colors border-b border-orange-300"
               >
                 Download the Source Code
               </a>
               <a
-                href="/Starryapk.zip"
+                href={`${process.env.PUBLIC_URL}/Starryapk.zip`}
                 download
                 className="block px-4 py-2 text-orange-600 hover:bg-orange-50 transition-colors border-b border-orange-300"
               >
