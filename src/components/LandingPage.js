@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Moon, 
   Sun, 
@@ -14,6 +14,8 @@ import {
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [showDownloadMenu, setShowDownloadMenu] = useState(false);
+  const [showTeamDetails, setShowTeamDetails] = useState(false);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -21,6 +23,14 @@ const LandingPage = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+  };
+
+  const toggleDownloadMenu = () => {
+    setShowDownloadMenu(!showDownloadMenu);
+  };
+
+  const toggleTeamDetails = () => {
+    setShowTeamDetails(!showTeamDetails);
   };
 
   return (
@@ -58,6 +68,12 @@ const LandingPage = () => {
               >
                 Video
               </button>
+              <button 
+                onClick={() => scrollToSection('diagrams')}
+                className="text-orange-600 hover:text-orange-500 transition-colors"
+              >
+                Diagrams
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -89,6 +105,12 @@ const LandingPage = () => {
                 className="block w-full text-left px-4 py-2 text-orange-600 hover:bg-orange-50 transition-colors"
               >
                 Video
+              </button>
+              <button 
+                onClick={() => scrollToSection('diagrams')}
+                className="block w-full text-left px-4 py-2 text-orange-600 hover:bg-orange-50 transition-colors"
+              >
+                Diagrams
               </button>
             </div>
           )}
@@ -127,15 +149,98 @@ const LandingPage = () => {
         <p className="text-xl md:text-2xl mb-8 text-orange-500 animate-slideUp">
           ✨ Your Daily Astrology & Tarot Companion ✨
         </p>
-        <div className="flex gap-4 justify-center animate-fadeIn">
-          <button className="bg-gradient-to-r from-orange-400 to-pink-400 hover:from-orange-500 hover:to-pink-500 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
+        <div className="flex gap-8 justify-center animate-fadeIn">
+        <div
+            className="relative group overflow-visible z-50"
+            onMouseEnter={() => setIsMenuOpen(true)}
+            onMouseLeave={() => setIsMenuOpen(false)}
+          >
+            {/* Download Now Button */}
+            <button className="bg-gradient-to-r from-orange-400 to-pink-400 hover:from-orange-500 hover:to-pink-500 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
             Download Now
           </button>
-          <button className="bg-white/50 hover:bg-white/70 border-2 border-orange-300 text-orange-600 px-8 py-3 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
-            Learn More
+
+            {/* Dropdown Menu */}
+            <div
+              className={`absolute top-9 left-0 bg-white border border-orange-300 rounded-lg shadow-lg w-64 ${
+                isMenuOpen ? 'block' : 'hidden'
+              }`}
+              style={{ paddingBottom: '16px', zIndex: '100' }}
+            >
+              <a
+                href="/Group_3_Starry.zip"
+                download
+                className="block px-4 py-2 text-orange-600 hover:bg-orange-50 transition-colors border-b border-orange-300"
+              >
+                Download the Source Code
+              </a>
+              <a
+                href="/Starryapk.zip"
+                download
+                className="block px-4 py-2 text-orange-600 hover:bg-orange-50 transition-colors border-b border-orange-300"
+              >
+                Download the App APK
+              </a>
+            </div>
+          </div>
+          <button 
+            onClick={toggleTeamDetails}
+            className="bg-white/50 hover:bg-white/70 border-2 border-orange-300 text-orange-600 px-8 py-3 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            About Us
           </button>
         </div>
       </header>
+
+      {/* Team Section */}
+      {showTeamDetails && (
+        <section
+        id="team"
+        className="container mx-auto px-4 py-16 bg-orange-50 text-orange-800 rounded-lg shadow-lg"
+      >
+        <h2 className="text-3xl font-bold text-center mb-12 text-orange-600">
+          Meet the Starry Team
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="bg-white/80 p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold mb-2 text-orange-700">
+              Zhengying Sun
+            </h3>
+            <p className="text-orange-600">
+              Designed Sign Up/Sign In/Sign Out functionality, maintained Firebase
+              database.
+            </p>
+          </div>
+          <div className="bg-white/80 p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold mb-2 text-orange-700">Alice</h3>
+            <p className="text-orange-600">
+              Built Tarot functionality, designed home page, integrated AI chatbot,
+              and handled final code cleanup.
+            </p>
+          </div>
+          <div className="bg-white/80 p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold mb-2 text-orange-700">Linda</h3>
+            <p className="text-orange-600">
+              Designed Compatibility feature, assisted in API testing, and
+              collaborated on home page design.
+            </p>
+          </div>
+          <div className="bg-white/80 p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold mb-2 text-orange-700">Kay</h3>
+            <p className="text-orange-600">
+              Developed Profile functionality, implemented user chart displays, and
+              extracted user data from Firebase.
+            </p>
+          </div>
+          <div className="bg-white/80 p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold mb-2 text-orange-700">Lucia</h3>
+            <p className="text-orange-600">
+              Some UI elements
+            </p>
+          </div>
+        </div>
+      </section>
+      )}
 
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-16">
@@ -186,6 +291,50 @@ const LandingPage = () => {
             ></iframe>
           </div>
         </div>
+
+        {/* Padding between the two videos */}
+        <div className="py-8"></div>
+
+        {/* Title for the second video */}
+        <h2 className="text-3xl font-bold text-center mb-12 text-orange-600 animate-fadeIn">
+          Final Presentation and Demo
+        </h2>
+        <div className="max-w-2xl mx-auto">
+          <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-xl animate-slideUp">
+            <iframe
+              src="https://youtu.be/UJ5Lteqcg70" // Replace with your video URL
+              title="Final Presentation and Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full rounded-2xl"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* New Diagrams Section */}
+      <section id="diagrams" className="container mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-center mb-12 text-orange-600">How to Work</h2>
+        <div className="space-y-12">
+          {/* MVVM Diagram */}
+          <div>
+            <h3 className="text-2xl font-semibold text-center text-orange-500 mb-6">MVVM Diagram</h3>
+            <img
+              src={`${process.env.PUBLIC_URL}/mvvm.png`}
+              alt="MVVM Diagram"
+              className="mx-auto rounded-xl shadow-lg"
+            />
+          </div>
+          {/* Threaded Diagram */}
+          <div>
+            <h3 className="text-2xl font-semibold text-center text-orange-500 mb-6">Threaded Diagram</h3>
+            <img
+              src={`${process.env.PUBLIC_URL}/thread_design.jpg`}
+              alt="Threaded Diagram"
+              className="mx-auto rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
       </section>
 
       {/* Floating Decorative Elements */}
@@ -200,6 +349,7 @@ const LandingPage = () => {
       </div>
     </div>
   );
+
 };
 
 export default LandingPage;
